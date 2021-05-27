@@ -20,7 +20,7 @@ fileprivate class MsgCallback {
 }
 
 public class MsgCenter {
-    static let shared = MsgCenter()
+    public static let shared = MsgCenter()
     
     
     private let notiKey: Notification.Name = Notification.Name(rawValue: "hb_notiKey")
@@ -36,7 +36,7 @@ public class MsgCenter {
     ///   - key: 关键字  以此区分消息来源
     ///   - info: 携带拓展信息
     /// - Returns: nil
-    func sendMsg(key: String, info: Any = "") -> Void {
+    public func sendMsg(key: String, info: Any = "") -> Void {
         
         var param:[String: Any] = [:]
         param["key"] = key
@@ -50,7 +50,7 @@ public class MsgCenter {
     ///   - target: 接收消息的目标，可自动释放
     ///   - callback: 回调
     /// - Returns: nil
-    func addObserver(_ target: AnyObject, callback: @escaping NotiCallback) -> Void {
+    public func addObserver(_ target: AnyObject, callback: @escaping NotiCallback) -> Void {
         
         let ca = MsgCallback(callback)
         weakTable.setObject(ca, forKey: target)
@@ -59,7 +59,7 @@ public class MsgCenter {
     /// 删除监听消息
     /// - Parameter target: 要删除的监听目标
     /// - Returns: nil
-    func removeObserver(_ target: AnyObject) -> Void {
+    public func removeObserver(_ target: AnyObject) -> Void {
         weakTable.removeObject(forKey: target)
     }
     

@@ -8,7 +8,7 @@
 import Foundation
 import CommonCrypto
 
-extension String {
+public extension String {
     
     func md5() -> String {
         let utf8 = cString(using: .utf8)

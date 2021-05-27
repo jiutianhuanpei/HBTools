@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Dictionary {
+public extension Dictionary {
     
     mutating func hb_addEntries(fromDic: Dictionary?) -> Void {
         

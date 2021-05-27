@@ -1,7 +1,7 @@
 import UIKit
 import CommonCrypto
 
-func hb_queryStr(_ param: Dictionary<String, Any>?) -> String? {
+public func hb_queryStr(_ param: Dictionary<String, Any>?) -> String? {
     
     guard let param = param else { return nil }
     
@@ -20,7 +20,7 @@ func hb_queryStr(_ param: Dictionary<String, Any>?) -> String? {
     return arr.joined(separator: "&")
 }
 
-func hb_bodyData(_ param: Dictionary<String, Any>?) -> Data? {
+public func hb_bodyData(_ param: Dictionary<String, Any>?) -> Data? {
     
     guard let param = param else { return nil }
     
@@ -32,11 +32,11 @@ func hb_bodyData(_ param: Dictionary<String, Any>?) -> Data? {
 }
 
 
-func hb_phoneId() -> String {
+public func hb_phoneId() -> String {
     return UIDevice.current.identifierForVendor!.uuidString
 }
 
-func hb_hmacSha256(content: Data, secretKey: Data) -> String {
+public func hb_hmacSha256(content: Data, secretKey: Data) -> String {
     
     var result = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
     
@@ -50,7 +50,7 @@ func hb_hmacSha256(content: Data, secretKey: Data) -> String {
     return kk
 }
 
-func toInt(_ num: Any?) -> Int {
+public func toInt(_ num: Any?) -> Int {
     
 
     if let a = num as? Int {
@@ -65,7 +65,7 @@ func toInt(_ num: Any?) -> Int {
     return 0
 }
 
-func toDouble(_ obj: Any?) -> Double {
+public func toDouble(_ obj: Any?) -> Double {
     if let a = obj as? Double {
         return a
     }
@@ -78,14 +78,14 @@ func toDouble(_ obj: Any?) -> Double {
     return 0
 }
 
-func toString(_ obj: Any?) -> String {
+public func toString(_ obj: Any?) -> String {
     if let a = obj as? String {
         return a
     }
     return ""
 }
 
-func toBool(_ obj: Any?) -> Bool {
+public func toBool(_ obj: Any?) -> Bool {
     if let a = obj as? Bool {
         return a
     }
