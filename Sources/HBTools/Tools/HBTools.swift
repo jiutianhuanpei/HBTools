@@ -50,56 +50,6 @@ public func hb_hmacSha256(content: Data, secretKey: Data) -> String {
     return kk
 }
 
-public func toInt(_ num: Any?) -> Int {
-    
-
-    if let a = num as? Int {
-        return a
-    }
-    
-    if let a = num as? String {
-        if let k = Int(a) {
-            return k
-        }
-    }
-    return 0
-}
-
-public func toDouble(_ obj: Any?) -> Double {
-    if let a = obj as? Double {
-        return a
-    }
-    
-    if let a = obj as? String {
-        if let k = Double(a) {
-            return k
-        }
-    }
-    return 0
-}
-
-public func toString(_ obj: Any?) -> String {
-    if let a = obj as? String {
-        return a
-    }
-    return ""
-}
-
-public func toBool(_ obj: Any?) -> Bool {
-    if let a = obj as? Bool {
-        return a
-    }
-    if let a = obj as? Int {
-        return a != 0
-    }
-    
-    if let a = obj as? String {
-        let b = a.lowercased()
-        return b == "yes" || b == "true"
-    }
-    
-    return false
-}
 
 
 
