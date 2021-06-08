@@ -9,21 +9,6 @@ import UIKit
 
 public extension UIImage {
     
-    /// 容错水平
-    enum QRCorrectionLevel: String {
-        //7%的字码可被修正
-        case L = "L"
-        
-        //15%的字码可被修正
-        case M = "M"
-        
-        //25%的字码可被修正
-        case Q = "Q"
-        
-        //30%的字码可被修正
-        case H = "H"
-    }
-    
     /// 生成二维码
     /// - Parameters:
     ///   - text: 要生成的文案
@@ -36,7 +21,7 @@ public extension UIImage {
         
         guard let data = text.data(using: .utf8) else { return nil }
 
-        guard let filter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
+        guard let filter = CIFilter(name: .CIQRCodeGenerator) else { return nil }
         
         filter.setValue(data, forKey: "inputMessage")
         filter.setValue(correctionLevel.rawValue, forKey: "inputCorrectionLevel")
@@ -48,9 +33,10 @@ public extension UIImage {
         
         let result = qrimg.transformed(by: transform)
         
-        let colorFilter = CIFilter(name: "CIFalseColor", parameters: ["inputImage": result,
-                                                                      "inputColor0" : CIColor(color: foregroundColor),
-                                                                      "inputColor1" : CIColor(color: backgroundColor)])
+        let colorFilter = CIFilter(name: .CIFalseColor, param: ["inputImage": result,
+                                                                "inputColor0" : CIColor(color: foregroundColor),
+                                                                "inputColor1" : CIColor(color: backgroundColor)])
+        
         
         guard let tmpImg = colorFilter?.outputImage else { return UIImage(ciImage: result) }
         return UIImage(ciImage: tmpImg)
@@ -82,6 +68,10 @@ public extension UIImage {
         return messages.count > 0 ? messages : nil
     }
     
+    
+}
+
+public extension UIImage {
     /// 重绘图片
     /// - Parameter size: 目标尺寸
     /// - Returns: 图片
@@ -96,4 +86,19 @@ public extension UIImage {
         return img ?? self
     }
     
+    convenience init?(color: UIColor, size: CGSize = .init(width: 1, height: 1)) {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        guard let context = UIGraphicsGetCurrentContext() else { return  nil }
+
+        context.setFillColor(color.cgColor)
+        context.fill(.init(origin: .zero, size: size))
+        
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard let cgImage = img?.cgImage else { return nil }
+        self.init(cgImage: cgImage)
+    }
 }
+
