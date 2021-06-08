@@ -52,6 +52,30 @@ public extension String {
         return data
     }
     
+    func subString(_ range: Range<Int>) -> String {
+        
+        if range.lowerBound < 0
+            || range.upperBound < 0
+            || range.upperBound > self.count {
+            return ""
+        }
+        
+        let begin = self.index(self.startIndex, offsetBy: range.lowerBound)
+        let end = self.index(self.startIndex, offsetBy: range.upperBound)
+        return String(self[begin..<end])
+    }
+    
+    func subString(_ range: ClosedRange<Int>) -> String {
+        if range.lowerBound < 0
+            || range.upperBound < 0
+            || range.lowerBound >= self.count {
+            return ""
+        }
+        
+        let begin = self.index(self.startIndex, offsetBy: range.lowerBound)
+        let end = self.index(self.startIndex, offsetBy: range.upperBound)
+        return String(self[begin...end])
+    }
     
 }
 
